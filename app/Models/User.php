@@ -60,4 +60,19 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $appends = [
         'profile_photo_url',
     ];
+
+    /**
+     * Delete the model from the database.
+     *
+     * @return bool|null
+     *
+     * @throws \Exception
+     */
+    public function delete()
+    {
+        $this->deleteProfilePhoto();
+        $this->tokens->each->delete();
+
+        return parent::delete();
+    }
 }
