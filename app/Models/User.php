@@ -62,6 +62,18 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
+     * Get the default profile photo URL if no profile photo has been uploaded.
+     *
+     * @return string
+     */
+    protected function defaultProfilePhotoUrl()
+    {
+        $initials = substr($this->first_name, 0, 1).substr($this->last_name, 0, 1);
+
+        return 'https://ui-avatars.com/api/?name='.urlencode($initials).'&color=7F9CF5&background=EBF4FF';
+    }
+
+    /**
      * Delete the model from the database.
      *
      * @return bool|null
